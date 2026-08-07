@@ -11,6 +11,7 @@
     <aside class="admin-access" aria-label="Menú lateral">
       <div class="admin-brand">REQAPP</div>
       <nav class="admin-nav">
+        <button type="button" id="auth-login" class="admin-nav-button">Login / Crear cuenta</button>
         <button type="button" id="admin-login" class="admin-nav-button">Login</button>
         <button type="button" id="admin-settings" class="admin-nav-button">Settings</button>
         <button type="button" id="admin-logout" class="admin-nav-button" disabled>Log out</button>
@@ -28,6 +29,36 @@
       <div id="admin-settings-panel" class="admin-settings-panel" hidden>
         <strong>Settings</strong>
         <p>Las solicitudes están protegidas y solo se muestran después del login.</p>
+      </div>
+      <div id="auth-panel" class="admin-panel auth-panel" hidden>
+        <h2>Cuenta de cliente</h2>
+        <p id="auth-user-status">Regístrate o inicia sesión para continuar.</p>
+        <label class="field">
+          <span>Correo electrónico</span>
+          <input id="auth-email" type="email" autocomplete="email" />
+        </label>
+        <label class="field">
+          <span>Contraseña</span>
+          <input id="auth-password" type="password" autocomplete="new-password" />
+        </label>
+        <div class="auth-actions">
+          <button type="button" id="auth-signup">Crear cuenta</button>
+          <button type="button" id="auth-signin">Iniciar sesión</button>
+        </div>
+        <button type="button" id="auth-google" class="auth-provider">Continuar con Google</button>
+        <button type="button" id="auth-facebook" class="auth-provider">Continuar con Facebook</button>
+        <label class="field">
+          <span>Teléfono con código SMS</span>
+          <input id="auth-phone" type="tel" placeholder="+18493808685" autocomplete="tel" />
+        </label>
+        <button type="button" id="auth-phone-button" class="auth-provider">Enviar código SMS</button>
+        <label class="field">
+          <span>Código SMS</span>
+          <input id="auth-phone-token" type="text" inputmode="numeric" autocomplete="one-time-code" />
+        </label>
+        <button type="button" id="auth-phone-verify" class="auth-provider">Verificar teléfono</button>
+        <button type="button" id="auth-logout" class="admin-nav-button" disabled>Cerrar sesión</button>
+        <p id="auth-status" class="form-status" aria-live="polite"></p>
       </div>
     </aside>
     <header class="hero">
@@ -139,6 +170,7 @@
     </main>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/script.js"></script>
 </body>
 </html>

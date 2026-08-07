@@ -8,6 +8,16 @@ const adminLoad = document.getElementById('admin-load');
 const adminPassword = document.getElementById('admin-password');
 const adminStatus = document.getElementById('admin-status');
 const adminRequests = document.getElementById('admin-requests');
+const authLogin = document.getElementById('auth-login');
+const authPanel = document.getElementById('auth-panel');
+const authEmail = document.getElementById('auth-email');
+const authPassword = document.getElementById('auth-password');
+const authPhone = document.getElementById('auth-phone');
+const authPhoneToken = document.getElementById('auth-phone-token');
+const authStatus = document.getElementById('auth-status');
+const authUserStatus = document.getElementById('auth-user-status');
+const authLogout = document.getElementById('auth-logout');
+let authClient;
 
 function handleFormSubmit(event) {
   event.preventDefault();
@@ -84,6 +94,76 @@ adminLogout.addEventListener('click', () => {
   adminStatus.textContent = 'Sesión cerrada.';
   adminLogout.disabled = true;
   adminPanel.hidden = true;
+});
+
+async function initializeAuth() {
+  const response = await fetch('/api/config');
+  const config = await response.json();
+  if (!response.ok) throw new Error(config.error || 'No se pudo cargar Auth.');
+  authClient = window.supabase.createClient(config.url, config.anonKey);
+  const { data } = await authClient.auth.getUser();
+  updateAuthStatus(data.user);
+  authClient.auth.onAuthStateChange((_event, session) => updateAuthStatus(session && session.user));
+}
+
+function updateAuthStatus(user) {
+  authUserStatus.textContent = user
+    ? `Sesión iniciada: ${user.email || user.phone || 'usuario'}`
+    : 'Regístrate o inicia sesión para continuar.';
+  authLogout.disabled = !user;
+}
+
+authLogin.addEventListener('click', () => {
+  adminPanel.hidden = true;
+  adminSettingsPanel.hidden = true;
+  authPanel.hidden = !authPanel.hidden;
+});
+
+document.getElementById('auth-signup').addEventListener('click', async () => {
+  authStatus.textContent = 'Creando cuenta...';
+  const { error } = await authClient.auth.signUp({ email: authEmail.value, password: authPassword.value });
+  authStatus.textContent = error ? error.message : 'Revisa tu correo para confirmar la cuenta.';
+});
+
+document.getElementById('auth-signin').addEventListener('click', async () => {
+  authStatus.textContent = 'Iniciando sesión...';
+  const { error } = await authClient.auth.signInWithPassword({ email: authEmail.value, password: authPassword.value });
+  authStatus.textContent = error ? error.message : 'Sesión iniciada correctamente.';
+});
+
+document.getElementById('auth-google').addEventListener('click', async () => {
+  const { error } = await authClient.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin } });
+  if (error) authStatus.textContent = error.message;
+});
+
+document.getElementById('auth-facebook').addEventListener('click', async () => {
+  const { error } = await authClient.auth.signInWithOAuth({ provider: 'facebook', options: { redirectTo: window.location.origin } });
+  if (error) authStatus.textContent = error.message;
+});
+
+document.getElementById('auth-phone-button').addEventListener('click', async () => {
+  authStatus.textContent = 'Enviando código SMS...';
+  const { error } = await authClient.auth.signInWithOtp({ phone: authPhone.value });
+  authStatus.textContent = error ? error.message : 'Código enviado por SMS.';
+});
+
+document.getElementById('auth-phone-verify').addEventListener('click', async () => {
+  authStatus.textContent = 'Verificando teléfono...';
+  const { error } = await authClient.auth.verifyOtp({
+    phone: authPhone.value,
+    token: authPhoneToken.value,
+    type: 'sms',
+  });
+  authStatus.textContent = error ? error.message : 'Teléfono verificado correctamente.';
+});
+
+authLogout.addEventListener('click', async () => {
+  const { error } = await authClient.auth.signOut();
+  authStatus.textContent = error ? error.message : 'Sesión cerrada.';
+});
+
+initializeAuth().catch((error) => {
+  authStatus.textContent = error.message;
 });
 
 adminLoad.addEventListener('click', async () => {

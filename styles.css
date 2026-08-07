@@ -86,6 +86,25 @@ textarea {
   font-size: .86rem;
   line-height: 1.5;
 }
+.auth-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.auth-provider {
+  width: 100%;
+  margin-top: 10px;
+  padding: 11px 12px;
+  border: 1px solid #eadfd3;
+  border-radius: 10px;
+  background: #fffaf6;
+  color: #825d41;
+  box-shadow: none;
+}
+.auth-provider:hover {
+  background: #f5e8d9;
+  box-shadow: none;
+}
 .page-shell {
   margin-left: 190px;
 }
