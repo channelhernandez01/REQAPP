@@ -11,6 +11,9 @@ module.exports = async (req, res) => {
     res.status(200).json(data);
   } catch (err) {
     console.error('api/todos error:', err.message || err);
-    res.status(500).json({ error: err.message || 'Internal server error' });
+    res.status(500).json({
+      error: err.message || 'Internal server error',
+      hint: 'Configure SUPABASE_URL and a Supabase key in Vercel Environment Variables.',
+    });
   }
 };
