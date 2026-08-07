@@ -18,14 +18,16 @@ function handleFormSubmit(event) {
     `Archivos: ${attachments.length ? attachments.map((file) => file.name).join(', ') : 'No adjuntos'}`,
   ].join('\n');
 
+  const message = `Nueva solicitud de cliente REQAPP\n\nNombre: ${values.name}\nEmpresa: ${values.company}\nCorreo: ${values.email}\nTeléfono: ${values.phone}\nDirección: ${values.address || 'No indicada'}\nTipo de proyecto: ${values.projectType}\nPresupuesto: ${values.budget}\nPlazo: ${values.deadline}\n${socialLinks}\n${files}\nDescripción:\n${values.description}\nRecomendaciones u opiniones:\n${values.feedback || 'No indicadas'}\n\nNota: los archivos seleccionados deben adjuntarse manualmente.`;
   const subject = encodeURIComponent('Nueva solicitud de cliente REQAPP');
-  const body = encodeURIComponent(
-    `Nombre: ${values.name}\nEmpresa: ${values.company}\nCorreo: ${values.email}\nTeléfono: ${values.phone}\nDirección: ${values.address || 'No indicada'}\nTipo de proyecto: ${values.projectType}\nPresupuesto: ${values.budget}\nPlazo: ${values.deadline}\n${socialLinks}\n${files}\nDescripción:\n${values.description}\nRecomendaciones u opiniones:\n${values.feedback || 'No indicadas'}\n\nNota: los archivos seleccionados deben adjuntarse manualmente al correo.`
-  );
+  const body = encodeURIComponent(message);
+  const whatsappMessage = encodeURIComponent(message);
 
+  // Open WhatsApp with the request while the submission click is still trusted by the browser.
+  window.open(`https://wa.me/18493808685?text=${whatsappMessage}`, '_blank', 'noopener');
   window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-  statusElement.textContent = 'Solicitud lista. Adjunta manualmente los archivos en el correo que se abrirá.';
-  statusElement.style.color = '#a8d5c6';
+  statusElement.textContent = 'Se abrió un correo para Gmail y WhatsApp con la solicitud lista para enviar.';
+  statusElement.style.color = '#739d7d';
 }
 
 const form = document.getElementById('client-form');
