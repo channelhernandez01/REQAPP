@@ -24,24 +24,32 @@ textarea {
   padding: 30px 20px 56px;
 }
 .admin-access {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 12px;
-}
-.admin-access[hidden] {
-  display: none;
+  position: fixed;
+  top: 50%;
+  right: 0;
+  z-index: 10;
+  transform: translateY(-50%);
+  margin: 0;
 }
 .admin-toggle {
-  padding: 10px 16px;
-  border-radius: 10px;
+  padding: 14px 10px;
+  border-radius: 12px 0 0 12px;
   background: #fff;
   color: #825d41;
   border: 1px solid #eadfd3;
   box-shadow: none;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
 }
 .admin-panel {
-  width: min(100%, 620px);
-  margin: 0 0 20px auto;
+  position: fixed;
+  top: 50%;
+  right: 54px;
+  width: min(460px, calc(100vw - 80px));
+  max-height: 80vh;
+  overflow-y: auto;
+  transform: translateY(-50%);
+  margin: 0;
   padding: 22px;
   border: 1px solid #eadfd3;
   border-radius: 18px;
