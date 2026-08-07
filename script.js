@@ -141,6 +141,11 @@ document.getElementById('auth-facebook').addEventListener('click', async () => {
   if (error) authStatus.textContent = error.message;
 });
 
+document.getElementById('auth-twitter').addEventListener('click', async () => {
+  const { error } = await authClient.auth.signInWithOAuth({ provider: 'twitter', options: { redirectTo: window.location.origin } });
+  if (error) authStatus.textContent = error.message;
+});
+
 document.getElementById('auth-phone-button').addEventListener('click', async () => {
   authStatus.textContent = 'Enviando código SMS...';
   const { error } = await authClient.auth.signInWithOtp({ phone: authPhone.value });
