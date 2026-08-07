@@ -8,6 +8,18 @@
 </head>
 <body>
   <div class="page-shell">
+    <section class="admin-access" aria-label="Panel de administración">
+      <button type="button" id="admin-toggle" class="admin-toggle">Administración</button>
+      <div id="admin-panel" class="admin-panel" hidden>
+        <label class="field">
+          <span>Contraseña de administradora</span>
+          <input id="admin-password" type="password" autocomplete="current-password" />
+        </label>
+        <button type="button" id="admin-load">Ver solicitudes</button>
+        <p id="admin-status" class="form-status" aria-live="polite"></p>
+        <div id="admin-requests" class="admin-requests"></div>
+      </div>
+    </section>
     <header class="hero">
       <div class="hero-copy">
         <span class="eyebrow">Solicitud de proyecto</span>

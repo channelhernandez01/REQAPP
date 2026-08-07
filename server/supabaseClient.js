@@ -12,6 +12,25 @@ function getClient() {
   return createClient(url, key);
 }
 
+async function saveRequest(request) {
+  const { data, error } = await getClient()
+    .from('client_requests')
+    .insert(request)
+    .select()
+    .single();
+  if (error) throw error;
+  return data;
+}
+
+async function listRequests() {
+  const { data, error } = await getClient()
+    .from('client_requests')
+    .select('*')
+    .order('created_at', { ascending: false });
+  if (error) throw error;
+  return data;
+}
+
 async function getAllFrom(table, options = { select: '*' }) {
   const supabase = getClient();
   const { data, error } = await supabase.from(table).select(options.select);
@@ -21,4 +40,6 @@ async function getAllFrom(table, options = { select: '*' }) {
 
 module.exports = {
   getAllFrom,
+  saveRequest,
+  listRequests,
 };

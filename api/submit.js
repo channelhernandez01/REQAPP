@@ -1,4 +1,5 @@
 const { Resend } = require('resend');
+const { saveRequest } = require('../server/supabaseClient');
 
 const recipient = 'channelhernandez744@gmail.com';
 const sender = 'REQAPP <onboarding@resend.dev>';
@@ -47,6 +48,18 @@ module.exports = async (req, res) => {
   if (error) {
     console.error('Resend error:', error);
     res.status(502).json({ error: 'The request email could not be sent.' });
+    return;
+  }
+
+  try {
+    await saveRequest({
+      message: payload.message,
+      attachments: payload.attachments || [],
+      email_id: data && data.id,
+    });
+  } catch (storageError) {
+    console.error('Request storage error:', storageError);
+    res.status(502).json({ error: 'The email was sent, but the request could not be stored.' });
     return;
   }
 

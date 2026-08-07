@@ -23,6 +23,40 @@ textarea {
   margin: 0 auto;
   padding: 30px 20px 56px;
 }
+.admin-access {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+.admin-toggle {
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: #fff;
+  color: #825d41;
+  border: 1px solid #eadfd3;
+  box-shadow: none;
+}
+.admin-panel {
+  width: min(100%, 620px);
+  margin: 0 0 20px auto;
+  padding: 22px;
+  border: 1px solid #eadfd3;
+  border-radius: 18px;
+  background: #fff;
+}
+.admin-requests {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+.admin-request {
+  padding: 16px;
+  border: 1px solid #eee2d7;
+  border-radius: 12px;
+  background: #fffaf6;
+  white-space: pre-wrap;
+  line-height: 1.5;
+}
 .hero {
   display: flex;
   flex-wrap: wrap;

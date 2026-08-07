@@ -1,4 +1,10 @@
 const statusElement = document.getElementById('form-status');
+const adminToggle = document.getElementById('admin-toggle');
+const adminPanel = document.getElementById('admin-panel');
+const adminLoad = document.getElementById('admin-load');
+const adminPassword = document.getElementById('admin-password');
+const adminStatus = document.getElementById('admin-status');
+const adminRequests = document.getElementById('admin-requests');
 
 function handleFormSubmit(event) {
   event.preventDefault();
@@ -57,3 +63,29 @@ function handleFormSubmit(event) {
 
 const form = document.getElementById('client-form');
 form.addEventListener('submit', handleFormSubmit);
+
+adminToggle.addEventListener('click', () => {
+  adminPanel.hidden = !adminPanel.hidden;
+});
+
+adminLoad.addEventListener('click', async () => {
+  adminStatus.textContent = 'Cargando solicitudes...';
+  adminRequests.replaceChildren();
+  try {
+    const response = await fetch('/api/admin', {
+      headers: { 'x-admin-password': adminPassword.value },
+    });
+    const result = await response.json();
+    if (!response.ok) throw new Error(result.error || 'No autorizado.');
+    result.forEach((request) => {
+      const card = document.createElement('article');
+      card.className = 'admin-request';
+      const date = request.created_at ? new Date(request.created_at).toLocaleString('es-DO') : '';
+      card.textContent = `${date}\n\n${request.message}`;
+      adminRequests.appendChild(card);
+    });
+    adminStatus.textContent = result.length ? 'Solicitudes cargadas.' : 'No hay solicitudes todavía.';
+  } catch (error) {
+    adminStatus.textContent = error.message;
+  }
+});
