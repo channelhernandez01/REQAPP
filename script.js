@@ -4,7 +4,6 @@ function handleFormSubmit(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
   const values = Object.fromEntries(formData.entries());
-  const email = 'channelhernandez744@gmail.com';
   const logo = formData.get('companyLogo');
   const attachments = formData.getAll('attachments').filter((file) => file.name);
   const socialLinks = [
@@ -19,15 +18,41 @@ function handleFormSubmit(event) {
   ].join('\n');
 
   const message = `Nueva solicitud de cliente REQAPP\n\nNombre: ${values.name}\nEmpresa: ${values.company}\nCorreo: ${values.email}\nTeléfono: ${values.phone}\nDirección: ${values.address || 'No indicada'}\nTipo de proyecto: ${values.projectType}\nPresupuesto: ${values.budget}\nPlazo: ${values.deadline}\n${socialLinks}\n${files}\nDescripción:\n${values.description}\nRecomendaciones u opiniones:\n${values.feedback || 'No indicadas'}\n\nNota: los archivos seleccionados deben adjuntarse manualmente.`;
-  const subject = encodeURIComponent('Nueva solicitud de cliente REQAPP');
-  const body = encodeURIComponent(message);
   const whatsappMessage = encodeURIComponent(message);
 
-  // Open WhatsApp with the request while the submission click is still trusted by the browser.
-  window.open(`https://wa.me/18493808685?text=${whatsappMessage}`, '_blank', 'noopener');
-  window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-  statusElement.textContent = 'Se abrió un correo para Gmail y WhatsApp con la solicitud lista para enviar.';
-  statusElement.style.color = '#739d7d';
+  const files = [logo, ...attachments].filter((file) => file && file.name);
+  const readFiles = files.map((file) => new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve({
+      filename: file.name,
+      content: reader.result.split(',')[1],
+    });
+    reader.onerror = () => reject(new Error(`No se pudo leer ${file.name}.`));
+    reader.readAsDataURL(file);
+  }));
+
+  statusElement.textContent = 'Enviando la solicitud...';
+  statusElement.style.color = '#817a74';
+
+  Promise.all(readFiles)
+    .then((encodedFiles) => fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message, attachments: encodedFiles }),
+    }))
+    .then(async (response) => {
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || 'No se pudo enviar la solicitud.');
+      }
+      window.open(`https://wa.me/18493808685?text=${whatsappMessage}`, '_blank', 'noopener');
+      statusElement.textContent = 'Solicitud enviada a tu Gmail. También se abrió WhatsApp.';
+      statusElement.style.color = '#739d7d';
+    })
+    .catch((error) => {
+      statusElement.textContent = `No se pudo enviar: ${error.message}`;
+      statusElement.style.color = '#b75f52';
+    });
 }
 
 const form = document.getElementById('client-form');
