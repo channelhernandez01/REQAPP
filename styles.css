@@ -28,6 +28,9 @@ textarea {
   justify-content: flex-end;
   margin-bottom: 12px;
 }
+.admin-access[hidden] {
+  display: none;
+}
 .admin-toggle {
   padding: 10px 16px;
   border-radius: 10px;

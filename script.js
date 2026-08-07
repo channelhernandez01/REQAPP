@@ -6,6 +6,13 @@ const adminPassword = document.getElementById('admin-password');
 const adminStatus = document.getElementById('admin-status');
 const adminRequests = document.getElementById('admin-requests');
 
+document.addEventListener('keydown', (event) => {
+  if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'a') {
+    event.preventDefault();
+    document.querySelector('.admin-access').hidden = false;
+  }
+});
+
 function handleFormSubmit(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
