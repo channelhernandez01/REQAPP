@@ -12,8 +12,6 @@ const authLogin = document.getElementById('auth-login');
 const authPanel = document.getElementById('auth-panel');
 const authEmail = document.getElementById('auth-email');
 const authPassword = document.getElementById('auth-password');
-const authPhone = document.getElementById('auth-phone');
-const authPhoneToken = document.getElementById('auth-phone-token');
 const authStatus = document.getElementById('auth-status');
 const authUserStatus = document.getElementById('auth-user-status');
 const authLogout = document.getElementById('auth-logout');
@@ -129,37 +127,6 @@ document.getElementById('auth-signin').addEventListener('click', async () => {
   authStatus.textContent = 'Iniciando sesión...';
   const { error } = await authClient.auth.signInWithPassword({ email: authEmail.value, password: authPassword.value });
   authStatus.textContent = error ? error.message : 'Sesión iniciada correctamente.';
-});
-
-document.getElementById('auth-google').addEventListener('click', async () => {
-  const { error } = await authClient.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: window.location.origin } });
-  if (error) authStatus.textContent = error.message;
-});
-
-document.getElementById('auth-facebook').addEventListener('click', async () => {
-  const { error } = await authClient.auth.signInWithOAuth({ provider: 'facebook', options: { redirectTo: window.location.origin } });
-  if (error) authStatus.textContent = error.message;
-});
-
-document.getElementById('auth-twitter').addEventListener('click', async () => {
-  const { error } = await authClient.auth.signInWithOAuth({ provider: 'twitter', options: { redirectTo: window.location.origin } });
-  if (error) authStatus.textContent = error.message;
-});
-
-document.getElementById('auth-phone-button').addEventListener('click', async () => {
-  authStatus.textContent = 'Enviando código SMS...';
-  const { error } = await authClient.auth.signInWithOtp({ phone: authPhone.value });
-  authStatus.textContent = error ? error.message : 'Código enviado por SMS.';
-});
-
-document.getElementById('auth-phone-verify').addEventListener('click', async () => {
-  authStatus.textContent = 'Verificando teléfono...';
-  const { error } = await authClient.auth.verifyOtp({
-    phone: authPhone.value,
-    token: authPhoneToken.value,
-    type: 'sms',
-  });
-  authStatus.textContent = error ? error.message : 'Teléfono verificado correctamente.';
 });
 
 authLogout.addEventListener('click', async () => {
