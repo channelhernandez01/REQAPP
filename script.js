@@ -1,30 +1,5 @@
 const statusElement = document.getElementById('form-status');
 
-async function loadDocument() {
-  try {
-    const response = await fetch('document.txt');
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-
-    const text = await response.text();
-    const section = document.getElementById('content');
-    const paragraphs = text.split(/\n\n+/).filter(Boolean);
-
-    if (paragraphs.length === 0) {
-      section.innerHTML = '<p>No se encontró contenido en el documento.</p>';
-      return;
-    }
-
-    section.innerHTML = paragraphs
-      .map((p) => `<p>${p.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>`)
-      .join('');
-  } catch (error) {
-    const section = document.getElementById('content');
-    section.innerHTML = `<p>Error cargando el documento: ${error.message}</p>`;
-  }
-}
-
 function handleFormSubmit(event) {
   event.preventDefault();
   const formData = new FormData(event.target);
@@ -55,5 +30,3 @@ function handleFormSubmit(event) {
 
 const form = document.getElementById('client-form');
 form.addEventListener('submit', handleFormSubmit);
-
-loadDocument();
