@@ -117,6 +117,23 @@ textarea {
   font-size: 0.95rem;
   font-weight: 600;
 }
+.field-help {
+  color: #817a74;
+  font-size: 0.82rem;
+  line-height: 1.4;
+}
+fieldset.field {
+  min-width: 0;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid #eadfd3;
+  border-radius: 16px;
+}
+fieldset.field legend {
+  padding: 0 8px;
+  color: #4d4a47;
+  font-weight: 600;
+}
 input,
 select,
 textarea {
@@ -128,6 +145,19 @@ textarea {
   padding: 16px 18px;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+input[type="file"] {
+  padding: 12px;
+  cursor: pointer;
+}
+input[type="file"]::file-selector-button {
+  margin-right: 10px;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: #f5e8d9;
+  color: #825d41;
+  cursor: pointer;
 }
 input::placeholder,
 textarea::placeholder {

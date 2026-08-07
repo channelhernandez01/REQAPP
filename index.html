@@ -68,6 +68,45 @@
               <input type="text" name="deadline" placeholder="Ej. 2 meses" />
             </label>
           </div>
+          <label class="field">
+            <span>Logo de la compañía</span>
+            <input type="file" name="companyLogo" accept="image/png,image/jpeg,image/svg+xml,image/webp" />
+            <small class="field-help">Adjunta el logo en PNG, JPG, SVG o WebP.</small>
+          </label>
+          <label class="field">
+            <span>Dirección</span>
+            <input type="text" name="address" placeholder="Calle, ciudad, país" autocomplete="street-address" />
+          </label>
+          <fieldset class="field social-fields">
+            <legend>Redes sociales</legend>
+            <div class="grid-2">
+              <label class="field">
+                <span>TikTok</span>
+                <input type="url" name="tiktok" placeholder="https://tiktok.com/@usuario" />
+              </label>
+              <label class="field">
+                <span>Instagram</span>
+                <input type="url" name="instagram" placeholder="https://instagram.com/usuario" />
+              </label>
+              <label class="field">
+                <span>X (Twitter)</span>
+                <input type="url" name="x" placeholder="https://x.com/usuario" />
+              </label>
+              <label class="field">
+                <span>Facebook</span>
+                <input type="url" name="facebook" placeholder="https://facebook.com/pagina" />
+              </label>
+            </div>
+          </fieldset>
+          <label class="field">
+            <span>Archivos y recomendaciones</span>
+            <input type="file" name="attachments" multiple />
+            <small class="field-help">Adjunta referencias, documentos u opiniones que debamos considerar.</small>
+          </label>
+          <label class="field">
+            <span>Recomendaciones u opiniones</span>
+            <textarea name="feedback" rows="4" placeholder="Cuéntanos qué te gustaría mejorar o qué esperas del proyecto"></textarea>
+          </label>
             <div class="form-actions">
             <button type="submit">Enviar solicitud</button>
           </div>
