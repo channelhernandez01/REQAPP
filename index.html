@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Formulario Futurista REQAPP</title>
+  <title>REQAPP | Tecnología inteligente</title>
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
@@ -49,16 +49,38 @@
         <p id="auth-status" class="form-status" aria-live="polite"></p>
       </div>
     </aside>
-    <header class="hero">
-      <div class="hero-copy">
-        <span class="eyebrow">Solicitud de proyecto</span>
-        <h1>Formulario de cliente</h1>
-        <p>Inicia tu proyecto con una propuesta hecha para ti.</p>
+    <nav class="site-nav">
+      <div class="site-logo"><span>✦</span> REQAPP</div>
+      <div class="site-links">
+        <a href="#inicio">INICIO</a>
+        <a href="#servicios">SERVICIOS</a>
+        <a href="#solicitud">TECNOLOGÍA</a>
+        <a href="#solicitud">NOSOTROS</a>
+        <a href="#solicitud">CONTACTO</a>
       </div>
-      <div class="hero-chip">REQAPP</div>
+      <a class="nav-cta" href="#solicitud">AGENDAR REUNIÓN <span>→</span></a>
+    </nav>
+    <header class="hero" id="inicio">
+      <div class="hero-copy">
+        <span class="eyebrow">INNOVACIÓN SIN LÍMITES</span>
+        <h1>TECNOLOGÍA<br><em>INTELIGENTE.</em><br>FUTURO REAL.</h1>
+        <p>Desarrollamos soluciones avanzadas que transforman negocios y crean experiencias extraordinarias.</p>
+        <div class="hero-actions">
+          <a class="primary-cta" href="#servicios">EXPLORAR SERVICIOS <span>→</span></a>
+          <a class="secondary-cta" href="#solicitud">CONOCER MÁS <span>→</span></a>
+        </div>
+      </div>
+      <div class="hero-orbit" aria-hidden="true"><div class="orbit-core">✦</div><i></i><b></b></div>
     </header>
 
-    <main class="layout">
+    <section class="services" id="servicios">
+      <article><span class="service-icon">▣</span><h3>INTELIGENCIA ARTIFICIAL</h3><p>Soluciones inteligentes que aprenden, se adaptan y optimizan tus procesos.</p><a href="#solicitud">→</a></article>
+      <article><span class="service-icon">⌁</span><h3>CLOUD AVANZADO</h3><p>Infraestructura escalable, segura y diseñada para el rendimiento.</p><a href="#solicitud">→</a></article>
+      <article><span class="service-icon">◇</span><h3>CIBERSEGURIDAD</h3><p>Protegemos lo que más importa con tecnología de última generación.</p><a href="#solicitud">→</a></article>
+      <article><span class="service-icon">↗</span><h3>INNOVACIÓN DIGITAL</h3><p>Creamos experiencias digitales únicas que impulsan el crecimiento.</p><a href="#solicitud">→</a></article>
+    </section>
+
+    <main class="layout" id="solicitud">
       <section class="panel form-panel">
         <div class="panel-header">
           <h2>Tu información</h2>
