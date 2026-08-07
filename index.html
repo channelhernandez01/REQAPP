@@ -8,9 +8,15 @@
 </head>
 <body>
   <div class="page-shell">
-    <section class="admin-access" aria-label="Panel de administración">
-      <button type="button" id="admin-toggle" class="admin-toggle">Administración</button>
+    <aside class="admin-access" aria-label="Menú lateral">
+      <div class="admin-brand">REQAPP</div>
+      <nav class="admin-nav">
+        <button type="button" id="admin-login" class="admin-nav-button">Login</button>
+        <button type="button" id="admin-settings" class="admin-nav-button">Settings</button>
+        <button type="button" id="admin-logout" class="admin-nav-button" disabled>Log out</button>
+      </nav>
       <div id="admin-panel" class="admin-panel" hidden>
+        <h2>Panel de solicitudes</h2>
         <label class="field">
           <span>Contraseña de administradora</span>
           <input id="admin-password" type="password" autocomplete="current-password" />
@@ -19,7 +25,11 @@
         <p id="admin-status" class="form-status" aria-live="polite"></p>
         <div id="admin-requests" class="admin-requests"></div>
       </div>
-    </section>
+      <div id="admin-settings-panel" class="admin-settings-panel" hidden>
+        <strong>Settings</strong>
+        <p>Las solicitudes están protegidas y solo se muestran después del login.</p>
+      </div>
+    </aside>
     <header class="hero">
       <div class="hero-copy">
         <span class="eyebrow">Solicitud de proyecto</span>

@@ -1,17 +1,13 @@
 const statusElement = document.getElementById('form-status');
-const adminToggle = document.getElementById('admin-toggle');
+const adminLogin = document.getElementById('admin-login');
+const adminSettings = document.getElementById('admin-settings');
+const adminLogout = document.getElementById('admin-logout');
 const adminPanel = document.getElementById('admin-panel');
+const adminSettingsPanel = document.getElementById('admin-settings-panel');
 const adminLoad = document.getElementById('admin-load');
 const adminPassword = document.getElementById('admin-password');
 const adminStatus = document.getElementById('admin-status');
 const adminRequests = document.getElementById('admin-requests');
-
-document.addEventListener('keydown', (event) => {
-  if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'a') {
-    event.preventDefault();
-    document.querySelector('.admin-access').hidden = false;
-  }
-});
 
 function handleFormSubmit(event) {
   event.preventDefault();
@@ -71,8 +67,23 @@ function handleFormSubmit(event) {
 const form = document.getElementById('client-form');
 form.addEventListener('submit', handleFormSubmit);
 
-adminToggle.addEventListener('click', () => {
+adminLogin.addEventListener('click', () => {
+  adminSettingsPanel.hidden = true;
   adminPanel.hidden = !adminPanel.hidden;
+  if (!adminPanel.hidden) adminPassword.focus();
+});
+
+adminSettings.addEventListener('click', () => {
+  adminPanel.hidden = true;
+  adminSettingsPanel.hidden = !adminSettingsPanel.hidden;
+});
+
+adminLogout.addEventListener('click', () => {
+  adminPassword.value = '';
+  adminRequests.replaceChildren();
+  adminStatus.textContent = 'Sesión cerrada.';
+  adminLogout.disabled = true;
+  adminPanel.hidden = true;
 });
 
 adminLoad.addEventListener('click', async () => {
@@ -84,6 +95,7 @@ adminLoad.addEventListener('click', async () => {
     });
     const result = await response.json();
     if (!response.ok) throw new Error(result.error || 'No autorizado.');
+    adminLogout.disabled = false;
     result.forEach((request) => {
       const card = document.createElement('article');
       card.className = 'admin-request';

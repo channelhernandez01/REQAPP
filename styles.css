@@ -25,35 +25,69 @@ textarea {
 }
 .admin-access {
   position: fixed;
-  top: 50%;
-  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
   z-index: 10;
-  transform: translateY(-50%);
+  width: 190px;
   margin: 0;
-}
-.admin-toggle {
-  padding: 14px 10px;
-  border-radius: 12px 0 0 12px;
+  padding: 24px 16px;
   background: #fff;
+  border-right: 1px solid #eadfd3;
+  box-shadow: 8px 0 26px rgba(105, 76, 48, 0.08);
+}
+.admin-brand {
+  margin-bottom: 32px;
   color: #825d41;
+  font-weight: 800;
+  letter-spacing: .08em;
+}
+.admin-nav {
+  display: grid;
+  gap: 10px;
+}
+.admin-nav-button {
+  width: 100%;
+  padding: 11px 12px;
   border: 1px solid #eadfd3;
+  border-radius: 10px;
+  background: #fffaf6;
+  color: #825d41;
   box-shadow: none;
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
+  text-align: left;
+}
+.admin-nav-button:hover:not(:disabled) {
+  background: #f5e8d9;
+  box-shadow: none;
+}
+.admin-nav-button:disabled {
+  cursor: not-allowed;
+  opacity: .5;
 }
 .admin-panel {
   position: fixed;
-  top: 50%;
-  right: 54px;
-  width: min(460px, calc(100vw - 80px));
+  top: 24px;
+  left: 214px;
+  width: min(460px, calc(100vw - 240px));
   max-height: 80vh;
   overflow-y: auto;
-  transform: translateY(-50%);
   margin: 0;
   padding: 22px;
   border: 1px solid #eadfd3;
   border-radius: 18px;
   background: #fff;
+}
+.admin-settings-panel {
+  margin-top: 28px;
+  padding: 14px;
+  border: 1px solid #eee2d7;
+  border-radius: 12px;
+  color: #6f6862;
+  font-size: .86rem;
+  line-height: 1.5;
+}
+.page-shell {
+  margin-left: 190px;
 }
 .admin-requests {
   display: grid;
@@ -289,6 +323,16 @@ button:hover {
   color: #5f5a56;
 }
 @media (max-width: 960px) {
+  .admin-access {
+    width: 156px;
+  }
+  .page-shell {
+    margin-left: 156px;
+  }
+  .admin-panel {
+    left: 174px;
+    width: calc(100vw - 190px);
+  }
   .layout {
     grid-template-columns: 1fr;
   }
@@ -300,5 +344,31 @@ button:hover {
   }
   .hero-chip {
     align-self: flex-start;
+  }
+}
+
+@media (max-width: 620px) {
+  .admin-access {
+    position: static;
+    width: auto;
+    min-height: auto;
+    padding: 14px;
+    border-right: 0;
+    border-bottom: 1px solid #eadfd3;
+  }
+  .page-shell {
+    margin-left: 0;
+  }
+  .admin-brand {
+    margin-bottom: 12px;
+  }
+  .admin-nav {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .admin-panel {
+    position: static;
+    width: auto;
+    max-height: none;
+    margin-top: 16px;
   }
 }
