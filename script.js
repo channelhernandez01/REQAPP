@@ -9,6 +9,7 @@ const adminPassword = document.getElementById('admin-password');
 const adminStatus = document.getElementById('admin-status');
 const adminRequests = document.getElementById('admin-requests');
 const authLogin = document.getElementById('auth-login');
+const authLoginNav = document.getElementById('auth-login-nav');
 const authPanel = document.getElementById('auth-panel');
 const authEmail = document.getElementById('auth-email');
 const authPassword = document.getElementById('auth-password');
@@ -111,11 +112,14 @@ function updateAuthStatus(user) {
   authLogout.disabled = !user;
 }
 
-authLogin.addEventListener('click', () => {
+function toggleAuthPanel() {
   adminPanel.hidden = true;
   adminSettingsPanel.hidden = true;
   authPanel.hidden = !authPanel.hidden;
-});
+}
+
+authLogin.addEventListener('click', toggleAuthPanel);
+authLoginNav.addEventListener('click', toggleAuthPanel);
 
 document.getElementById('auth-signup').addEventListener('click', async () => {
   authStatus.textContent = 'Creando cuenta...';

@@ -380,6 +380,18 @@ body {
 .site-links { display: flex; gap: 30px; }
 .site-links a, .nav-cta { color: #aaa39a; text-decoration: none; font-size: .7rem; letter-spacing: .08em; }
 .site-links a:hover { color: #d6a64d; }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.nav-login {
+  padding: 11px 18px;
+  border: 1px solid #735321;
+  border-radius: 5px;
+  background: transparent;
+  color: #d6a64d;
+  font-size: .7rem;
+  letter-spacing: .08em;
+  box-shadow: none;
+}
+.nav-login:hover { background: #2a2114; box-shadow: none; }
 .nav-cta, .secondary-cta { padding: 11px 18px; border: 1px solid #735321; border-radius: 5px; color: #d6a64d; }
 .nav-cta span, .hero-actions span { margin-left: 18px; color: #d6a64d; }
 .hero {
@@ -445,6 +457,7 @@ button:hover { background: linear-gradient(135deg, #e4bd70, #b17b29); box-shadow
   .site-links { display: none; }
   .site-nav { height: 58px; }
   .nav-cta { display: none; }
+  .nav-login { padding: 9px 12px; }
   .hero { padding: 52px 0 30px; }
   .hero h1 { font-size: 2.8rem; }
   .hero-orbit { width: 260px; height: 260px; }
