@@ -353,7 +353,7 @@ body {
 }
 .page-shell {
   max-width: 1180px;
-  margin: 0 auto 0 210px;
+  margin: 0 auto;
   padding: 0 32px 64px;
 }
 .admin-access {
@@ -442,10 +442,20 @@ button:hover { background: linear-gradient(135deg, #e4bd70, #b17b29); box-shadow
 .admin-nav-button, .auth-provider { background: #191815; border-color: #493921; color: #d6a64d; }
 .admin-nav-button:hover:not(:disabled), .auth-provider:hover { background: #2a2114; }
 .admin-settings-panel { background: #171614; border-color: #3a3020; color: #8d877e; }
+.auth-panel {
+  position: fixed;
+  z-index: 20;
+  top: 78px;
+  right: 32px;
+  left: auto;
+  width: min(420px, calc(100vw - 64px));
+  background: #121211;
+  border-color: #3a3020;
+}
 
 @media (max-width: 960px) {
   .admin-access { width: 176px; }
-  .page-shell { margin-left: 176px; }
+  .page-shell { margin-left: 0; }
   .admin-panel { left: 190px; width: calc(100vw - 210px); }
   .hero { grid-template-columns: 1fr; }
   .hero-orbit { margin: 20px auto 0; }
@@ -454,9 +464,7 @@ button:hover { background: linear-gradient(135deg, #e4bd70, #b17b29); box-shadow
 @media (max-width: 620px) {
   .page-shell { padding: 0 16px 40px; }
   .page-shell { margin-left: 0; }
-  .admin-access { position: static; width: auto; margin: 0 -16px; border-radius: 0; padding: 14px; }
-  .admin-nav { grid-template-columns: repeat(2, 1fr); }
-  .admin-panel { position: static; width: auto; max-height: none; margin-top: 16px; }
+  .admin-panel { position: fixed; top: 70px; left: 16px; right: 16px; width: auto; max-height: calc(100vh - 90px); margin: 0; }
   .site-links { display: none; }
   .site-nav { height: 58px; }
   .nav-cta { display: none; }

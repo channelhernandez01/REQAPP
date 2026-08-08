@@ -1,14 +1,4 @@
 const statusElement = document.getElementById('form-status');
-const adminLogin = document.getElementById('admin-login');
-const adminSettings = document.getElementById('admin-settings');
-const adminLogout = document.getElementById('admin-logout');
-const adminPanel = document.getElementById('admin-panel');
-const adminSettingsPanel = document.getElementById('admin-settings-panel');
-const adminLoad = document.getElementById('admin-load');
-const adminPassword = document.getElementById('admin-password');
-const adminStatus = document.getElementById('admin-status');
-const adminRequests = document.getElementById('admin-requests');
-const authLogin = document.getElementById('auth-login');
 const authLoginNav = document.getElementById('auth-login-nav');
 const authPanel = document.getElementById('auth-panel');
 const authEmail = document.getElementById('auth-email');
@@ -76,25 +66,6 @@ function handleFormSubmit(event) {
 const form = document.getElementById('client-form');
 form.addEventListener('submit', handleFormSubmit);
 
-adminLogin.addEventListener('click', () => {
-  adminSettingsPanel.hidden = true;
-  adminPanel.hidden = !adminPanel.hidden;
-  if (!adminPanel.hidden) adminPassword.focus();
-});
-
-adminSettings.addEventListener('click', () => {
-  adminPanel.hidden = true;
-  adminSettingsPanel.hidden = !adminSettingsPanel.hidden;
-});
-
-adminLogout.addEventListener('click', () => {
-  adminPassword.value = '';
-  adminRequests.replaceChildren();
-  adminStatus.textContent = 'Sesión cerrada.';
-  adminLogout.disabled = true;
-  adminPanel.hidden = true;
-});
-
 async function initializeAuth() {
   const response = await fetch('/api/config');
   const config = await response.json();
@@ -113,12 +84,9 @@ function updateAuthStatus(user) {
 }
 
 function toggleAuthPanel() {
-  adminPanel.hidden = true;
-  adminSettingsPanel.hidden = true;
   authPanel.hidden = !authPanel.hidden;
 }
 
-authLogin.addEventListener('click', toggleAuthPanel);
 authLoginNav.addEventListener('click', toggleAuthPanel);
 
 document.getElementById('auth-signup').addEventListener('click', async () => {
@@ -140,27 +108,4 @@ authLogout.addEventListener('click', async () => {
 
 initializeAuth().catch((error) => {
   authStatus.textContent = error.message;
-});
-
-adminLoad.addEventListener('click', async () => {
-  adminStatus.textContent = 'Cargando solicitudes...';
-  adminRequests.replaceChildren();
-  try {
-    const response = await fetch('/api/admin', {
-      headers: { 'x-admin-password': adminPassword.value },
-    });
-    const result = await response.json();
-    if (!response.ok) throw new Error(result.error || 'No autorizado.');
-    adminLogout.disabled = false;
-    result.forEach((request) => {
-      const card = document.createElement('article');
-      card.className = 'admin-request';
-      const date = request.created_at ? new Date(request.created_at).toLocaleString('es-DO') : '';
-      card.textContent = `${date}\n\n${request.message}`;
-      adminRequests.appendChild(card);
-    });
-    adminStatus.textContent = result.length ? 'Solicitudes cargadas.' : 'No hay solicitudes todavía.';
-  } catch (error) {
-    adminStatus.textContent = error.message;
-  }
 });
