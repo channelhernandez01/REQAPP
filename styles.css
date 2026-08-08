@@ -427,6 +427,22 @@ body {
 .services h3 { margin: 18px 0 8px; font-size: .78rem; font-weight: 500; }
 .services p { margin: 0; color: #8d877e; font-size: .78rem; line-height: 1.55; }
 .services a { display: block; margin-top: 16px; color: #d6a64d; text-decoration: none; }
+.about-section, .contact-section { padding: 56px; border-top: 1px solid #29251f; }
+.section-heading { max-width: 650px; }
+.section-heading h2 { margin: 16px 0 12px; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.1; }
+.section-heading h2 em { color: #d6a64d; font-style: normal; }
+.section-heading p { color: #8d877e; line-height: 1.7; }
+.about-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 34px; }
+.about-grid article { padding: 24px; min-height: 190px; border: 1px solid #2d2923; border-radius: 9px; background: linear-gradient(145deg, rgba(25,25,24,.75), rgba(10,10,10,.9)); }
+.about-number { color: #d6a64d; font-size: .72rem; letter-spacing: .16em; }
+.about-grid h3 { margin: 24px 0 10px; font-size: .8rem; letter-spacing: .12em; }
+.about-grid p { margin: 0; color: #8d877e; font-size: .84rem; line-height: 1.65; }
+.contact-section { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+.contact-cards { display: grid; gap: 14px; }
+.contact-cards a { display: flex; justify-content: space-between; align-items: center; gap: 18px; padding: 20px 22px; border: 1px solid #735321; border-radius: 8px; color: #f3f0eb; text-decoration: none; background: #121211; }
+.contact-cards a:hover { background: #2a2114; }
+.contact-cards strong { color: #d6a64d; font-size: 1.05rem; letter-spacing: .05em; }
+.contact-cards span { color: #aaa39a; font-size: .75rem; }
 .layout { margin-top: 10px; }
 .panel { background: #111110; border: 1px solid #2d2923; box-shadow: 0 20px 60px rgba(0,0,0,.3); border-radius: 10px; }
 .panel-header h2, .admin-panel h2 { color: #f3f0eb; }
@@ -460,6 +476,8 @@ button:hover { background: linear-gradient(135deg, #e4bd70, #b17b29); box-shadow
   .hero { grid-template-columns: 1fr; }
   .hero-orbit { margin: 20px auto 0; }
   .services { grid-template-columns: repeat(2, 1fr); }
+  .about-section, .contact-section { padding: 44px 24px; }
+  .contact-section { grid-template-columns: 1fr; gap: 24px; }
 }
 @media (max-width: 620px) {
   .page-shell { padding: 0 16px 40px; }
@@ -473,4 +491,7 @@ button:hover { background: linear-gradient(135deg, #e4bd70, #b17b29); box-shadow
   .hero h1 { font-size: 2.8rem; }
   .hero-orbit { width: 260px; height: 260px; }
   .services { grid-template-columns: 1fr; padding: 0 0 30px; }
+  .about-section, .contact-section { padding: 38px 0; }
+  .about-grid { grid-template-columns: 1fr; }
+  .contact-cards a { align-items: flex-start; flex-direction: column; gap: 8px; }
 }
