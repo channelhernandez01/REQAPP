@@ -353,17 +353,17 @@ body {
 }
 .page-shell {
   max-width: 1180px;
-  margin: 0 auto;
+  margin: 0 auto 0 210px;
   padding: 0 32px 64px;
 }
 .admin-access {
-  top: 96px;
-  bottom: auto;
-  width: 190px;
+  top: 0;
+  bottom: 0;
+  width: 210px;
   padding: 16px;
   background: rgba(12, 12, 12, .96);
   border: 1px solid #2d271d;
-  border-radius: 0 12px 12px 0;
+  border-radius: 0;
   box-shadow: 0 12px 40px rgba(0,0,0,.45);
 }
 .admin-brand { color: #d6a64d; margin-bottom: 18px; }
@@ -418,7 +418,9 @@ body {
 .hero-orbit { width: 340px; height: 340px; justify-self: center; position: relative; border: 1px solid rgba(214,166,77,.18); border-radius: 50%; box-shadow: 0 0 80px rgba(175,119,32,.12); }
 .hero-orbit::before, .hero-orbit::after { content: ''; position: absolute; inset: 12%; border: 1px solid rgba(214,166,77,.35); border-radius: 50%; transform: rotate(55deg) scaleY(.38); }
 .hero-orbit::after { inset: -5%; transform: rotate(-35deg) scaleY(.22); }
-.orbit-core { position: absolute; inset: 28%; display: grid; place-items: center; border-radius: 50%; background: radial-gradient(circle at 35% 25%, #6c604e, #0b0b0a 58%); color: #d6a64d; font-size: 4rem; box-shadow: 0 0 35px #8a5d1c; }
+.orbit-core { position: absolute; inset: 28%; display: grid; align-content: center; justify-items: center; gap: 8px; border-radius: 50%; background: radial-gradient(circle at 35% 25%, #6c604e, #0b0b0a 58%); color: #d6a64d; box-shadow: 0 0 35px #8a5d1c; }
+.orbit-core strong { font-size: 1.15rem; letter-spacing: .14em; }
+.orbit-core small { color: #aaa39a; font-size: .48rem; letter-spacing: .18em; }
 .services { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; padding: 0 56px 48px; }
 .services article { min-height: 175px; padding: 24px; border: 1px solid #2d2923; border-radius: 9px; background: linear-gradient(145deg, rgba(25,25,24,.75), rgba(10,10,10,.9)); }
 .service-icon { color: #d6a64d; font-size: 2rem; }
@@ -442,15 +444,16 @@ button:hover { background: linear-gradient(135deg, #e4bd70, #b17b29); box-shadow
 .admin-settings-panel { background: #171614; border-color: #3a3020; color: #8d877e; }
 
 @media (max-width: 960px) {
-  .admin-access { width: 156px; }
-  .page-shell { margin-left: 0; }
-  .admin-panel { left: 174px; width: calc(100vw - 190px); }
+  .admin-access { width: 176px; }
+  .page-shell { margin-left: 176px; }
+  .admin-panel { left: 190px; width: calc(100vw - 210px); }
   .hero { grid-template-columns: 1fr; }
   .hero-orbit { margin: 20px auto 0; }
   .services { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 620px) {
   .page-shell { padding: 0 16px 40px; }
+  .page-shell { margin-left: 0; }
   .admin-access { position: static; width: auto; margin: 0 -16px; border-radius: 0; padding: 14px; }
   .admin-nav { grid-template-columns: repeat(2, 1fr); }
   .admin-panel { position: static; width: auto; max-height: none; margin-top: 16px; }
